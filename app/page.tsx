@@ -4,7 +4,9 @@ import ProductosGrid from "@/component/ProductosGrid";
 import { productoServicio } from "@/src/Servicios/ProducosServicio";
 
 
+
 export default async function Page() {
+
 
 const productoService = productoServicio
 const productos = await productoService.obtenerTodosLosProductos();
@@ -14,6 +16,7 @@ const itemCarousel = productos.map(p => ({
   nombre: p.nombre,
   precio: p.precio,
   descripcion: p.descripcion,
+  stock: p.stock,
   imgUrl: p.imgUrl
 }));
 
@@ -22,7 +25,7 @@ const itemCarousel = productos.map(p => ({
 
     
      <HeroCarousel items={itemCarousel}/>
-      <ProductosGrid productos={productos}/>
+      <ProductosGrid productos={itemCarousel}/>
      
     </div>
   );

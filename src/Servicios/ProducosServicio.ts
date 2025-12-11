@@ -1,6 +1,6 @@
 import { Producto } from "../Dominio/Entidades/Producto";
 import { IProductoRepository } from "../Dominio/RepoInterface/IProductoRepository";
-import { ProductosRepositorio } from "../Infraestructura/MockProductos";
+import { ProductosRepositorio } from "../Infraestructura/mock/MockProductos";
 
  class ProductosServicio {
 

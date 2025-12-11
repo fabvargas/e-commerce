@@ -1,5 +1,5 @@
 "use client";
-import { ProductoType } from "@/app/type";
+import { ProductoType } from "@/type";
 import React, { useEffect, useState } from "react";
 
 

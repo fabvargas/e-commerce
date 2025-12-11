@@ -1,6 +1,7 @@
+"use client";
 
 
-import { ProductoType } from '@/app/type'
+import { ProductoType } from '@/type'
 import Link from "next/link";
 import React from 'react'
 
@@ -9,6 +10,7 @@ producto
 }:{
 producto:ProductoType
 }) {
+  
   return (
     <div
               className=" py-8 px-4 bg-card hover:shadow-lg hover:shadow-primary transition cursor-pointer rounded-lg"

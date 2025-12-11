@@ -1,4 +1,4 @@
-import { IProductoRepository } from "../Dominio/RepoInterface/IProductoRepository";
+import { IProductoRepository } from "../../Dominio/RepoInterface/IProductoRepository";
 
 const db = {
   productos: [

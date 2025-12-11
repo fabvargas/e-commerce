@@ -2,8 +2,10 @@
 
 import React, { useState } from "react";
 import Input from "./Input";
+import { useCarrito } from "@/store/useCarrito";
 
 export default function FormularioEnvio() {
+  const {carrito}= useCarrito()
   const [form, setForm] = useState({
     nombre: "",
     email: "",
@@ -133,7 +135,8 @@ export default function FormularioEnvio() {
 
       <button
         type="submit"
-        className="w-full bg-primary text-foreground-card py-3 rounded-lg font-bold hover:bg-primary/80 transition"
+        className="w-full bg-primary text-foreground-card py-3 rounded-lg font-bold hover:bg-primary/80 transition disabled:opacity-50"
+        {...carrito.length===0 && {disabled:true}}
       >
         Finalizar compra
       </button>

@@ -1,6 +1,6 @@
 import React from 'react'
 import ProductoCard from './ProductCard';
-import { ProductoType } from '@/app/type';
+import { ProductoType } from '@/type';
 
 export default function ProductosGrid({
     productos,
