@@ -22,7 +22,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${font.variable} antialiased`}
+        className={`${font.variable} antialiased min-h-screen`}
       >
           <NavBarr />
         {children}

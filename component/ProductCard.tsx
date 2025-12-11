@@ -1,4 +1,7 @@
+
+
 import { ProductoType } from '@/app/type'
+import Link from "next/link";
 import React from 'react'
 
 export default function ProductCard({
@@ -17,9 +20,12 @@ producto:ProductoType
               <h3 className="mt-2 font-semibold">{producto.nombre}</h3>
               <p className="text-sm text-mutted">{`$${producto.precio}`}</p>
               <p>{producto.descripcion}</p>
-              <button className="mt-2 w-full bg-primary text-foreground-card font-bold py-1 rounded hover:bg-primary/80 transition">
-                Ver
-              </button>
+             <Link
+  href={`${"/producto"}/${producto.id}`}
+  className="mt-2 block text-center w-full bg-primary text-foreground-card font-bold py-1 rounded hover:bg-primary/80 transition"
+>
+  Ver
+</Link>
             </div>
   )
 }

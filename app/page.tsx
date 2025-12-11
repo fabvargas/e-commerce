@@ -1,12 +1,12 @@
 
 import HeroCarousel from "@/component/HeroCarousel";
 import ProductosGrid from "@/component/ProductosGrid";
-import { ProductosServicio } from "@/src/Servicios/ProducosServicio";
-import { ProductosRepositorio } from "@/src/Infraestructura/MockProductos";
+import { productoServicio } from "@/src/Servicios/ProducosServicio";
+
 
 export default async function Page() {
-const productoRepository = new ProductosRepositorio();
-const productoService = new ProductosServicio(productoRepository)
+
+const productoService = productoServicio
 const productos = await productoService.obtenerTodosLosProductos();
 
 const itemCarousel = productos.map(p => ({

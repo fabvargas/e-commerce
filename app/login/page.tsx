@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="w-full min-h-screen sm:p-6 p-3 md:p-16 flex justify-center items-center">
+    <div className="w-full  sm:p-6 p-3 md:p-16 flex justify-center items-center">
       <form
         action=""
         className="

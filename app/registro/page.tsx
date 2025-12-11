@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function Registro() {
   return (
-    <div className="w-full min-h-screen sm:p-6 p-3 md:p-16 flex justify-center items-center">
+    <div className="w-full sm:p-6 p-3 md:p-16 flex justify-center items-center">
       <form
         action=""
         className="
@@ -70,9 +70,11 @@ export default function Registro() {
         <p className="text-sm text-center my-4"></p>
 
         <div className="flex flex-col space-y-4 md:px-6 px-0">
-       <Link
-  href="/login"
-  className="
+ 
+
+         <button
+          type="submit"
+          className="
     block
     text-center
     w-full 
@@ -84,28 +86,32 @@ export default function Registro() {
     hover:bg-primary/80 
     transition
   "
->
-  Registrar
-</Link>
-
-         <button
-          type="submit"
-          className="
-            w-full 
-            bg-transparent 
-            border 
-            border-primary 
-            text-primary
-            py-2 
-            rounded-lg
-            font-semibold 
-            hover:bg-primary
-            hover:text-foreground-card 
-            transition
-          "
+          
         >
-          Login
+          Registrar
         </button>
+
+              <Link
+  href="/login"
+  className="
+    block
+    text-center
+    w-full 
+    bg-transparent 
+    border 
+    border-primary 
+    text-primary
+    py-2 
+    rounded-lg
+    font-semibold 
+    hover:bg-primary
+    hover:text-foreground-card 
+    transition
+  "
+  
+>
+  Login
+</Link>
 
         </div>
         

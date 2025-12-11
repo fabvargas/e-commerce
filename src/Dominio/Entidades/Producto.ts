@@ -3,56 +3,70 @@ export interface ProductoProps {
   nombre: string;
   precio: number;
   descripcion: string;
+  stock: number;
   imgUrl: string;
 }
 
-export class Producto {
+export class Producto implements ProductoProps {
   private readonly props: ProductoProps;
 
- 
   private constructor(props: ProductoProps) {
     this.props = props;
   }
 
-
+  // ---------------------
+  // Validaciones
+  // ---------------------
   private static validar(props: ProductoProps) {
-    if (!props.nombre || props.nombre.trim().length === 0) {
-      throw new Error("El nombre del producto no puede estar vacío.");
+    if (!props.nombre || props.nombre.trim().length < 3) {
+      throw new Error("El nombre del producto debe tener al menos 3 caracteres.");
     }
 
     if (props.precio <= 0) {
       throw new Error("El precio debe ser mayor a 0.");
     }
 
-    if (!props.imgUrl.endsWith(".jpg")) {
-      throw new Error("La imagen debe ser un archivo .jpg.");
+    if (props.stock < 0) {
+      throw new Error("El stock no puede ser negativo.");
     }
+
+    if (!props.descripcion || props.descripcion.trim().length === 0) {
+      throw new Error("La descripción no puede estar vacía.");
+    }
+
   }
-
-
+  // ---------------------
+  // Método fábrica
+  // ---------------------
   static crear(props: ProductoProps): Producto {
-    this.validar(props); 
+    this.validar(props);
     return new Producto(props);
   }
 
-
-  get id(): number {
+  // ---------------------
+  // Getters
+  // ---------------------
+  get id() {
     return this.props.id;
   }
 
-  get nombre(): string {
+  get nombre() {
     return this.props.nombre;
   }
 
-  get precio(): number {
+  get precio() {
     return this.props.precio;
   }
 
-  get descripcion(): string {
+  get descripcion() {
     return this.props.descripcion;
   }
 
-  get imgUrl(): string {
+  get stock() {
+    return this.props.stock;
+  }
+
+  get imgUrl() {
     return this.props.imgUrl;
   }
 }

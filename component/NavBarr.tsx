@@ -10,8 +10,8 @@ export default function NavBarr() {
           <Link href="/" className="hover:text-primary transition">
             Inicio
           </Link>
-          <Link href="/productos" className="hover:text-primary transition">
-            Productos
+          <Link href="/carro" className="hover:text-primary transition">
+            Carro
           </Link>
           <Link href="/login" className="hover:text-primary transition">
             Login

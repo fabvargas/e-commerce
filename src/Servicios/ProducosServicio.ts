@@ -1,7 +1,8 @@
 import { Producto } from "../Dominio/Entidades/Producto";
 import { IProductoRepository } from "../Dominio/RepoInterface/IProductoRepository";
+import { ProductosRepositorio } from "../Infraestructura/MockProductos";
 
-export class ProductosServicio {
+ class ProductosServicio {
 
     private repositorio: IProductoRepository;
 
@@ -19,6 +20,7 @@ export class ProductosServicio {
                     nombre: prod.nombre,
                     precio: prod.precio,
                     descripcion: prod.descripcion,
+                    stock: prod.stock,
                     imgUrl: prod.imgUrl
                 }); 
             });
@@ -30,4 +32,30 @@ export class ProductosServicio {
         }
        
     }
+
+    async obtenerProductoPorId(id: number) {
+        try {
+            const producto = await this.repositorio.obtenerPorId(id);
+            if (!producto) {
+                return null;
+            }
+
+            return Producto.crear({
+                id: producto.id,
+                nombre: producto.nombre,
+                precio: producto.precio,
+                descripcion: producto.descripcion,
+                stock: producto.stock,
+                imgUrl: producto.imgUrl
+            });
+        } catch (error) {
+            throw new Error("Error al obtener el producto: " + (error as Error).message);
+        }
+    }
 }
+
+
+const productosRepositorio = new ProductosRepositorio();
+
+export const productoServicio = new ProductosServicio( productosRepositorio); 
+

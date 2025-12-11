@@ -8,7 +8,7 @@ interface HeroCarouselProps {
   autoPlayInterval?: number; // ms, opcional
 }
 
-export default function HeroCarousel({ items, autoPlayInterval = 3000 }: HeroCarouselProps) {
+export default function HeroCarousel({ items, autoPlayInterval = 4000 }: HeroCarouselProps) {
   const [current, setCurrent] = useState(0);
 
   // Autoplay
