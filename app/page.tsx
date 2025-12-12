@@ -10,6 +10,7 @@ export default async function Page() {
 
 const productoService = productoServicio
 const productos = await productoService.obtenerTodosLosProductos();
+console.log(productos)
 
 const itemCarousel = productos.map(p => ({
   id: p.id,

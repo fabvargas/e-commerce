@@ -1,46 +1,65 @@
 import { ValidationError } from "@/src/CustomError";
 
-export interface IUser{
-    id:number;
-    email:string;
-    password:string;
+export interface UserProps {
+  id: number;
+  email: string;
+  password: string;
+  nombre?: string;
+  direccion?: string;
+  telefono?: string;
 }
 
-export class User implements IUser{
-    id: number;
-    email: string;
-    password: string;
+export class User implements UserProps {
+  id: number;
+  email: string;
+  password: string;
+  nombre?: string;
+  direccion?: string;
+  telefono?: string;
 
-    private constructor(id:number, email:string, password:string){
-        this.id=id;
-        this.email=email;
-        this.password=password;
+  private constructor({
+    id,
+    email,
+    password,
+    nombre,
+    direccion,
+    telefono
+  }: UserProps) {
+    this.id = id;
+    this.email = email;
+    this.password = password;
+    this.nombre = nombre;
+    this.direccion = direccion;
+    this.telefono = telefono;
+  }
+
+  // -----------------------------
+  // Validaciones internas
+  // -----------------------------
+  private static validarEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  private static validarPassword(password: string): boolean {
+    return password.length >= 6;
+  }
+
+  private static validar(props: UserProps) {
+    if (!this.validarEmail(props.email)) {
+      throw new ValidationError("Email no es válido");
     }
 
-    private validatedEmail():boolean{
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return emailRegex.test(this.email);
+    if (!this.validarPassword(props.password)) {
+      throw new ValidationError("Password debe tener al menos 6 caracteres");
     }
+  }
 
-    private validatedPassword():boolean{
-        return this.password.length >=6;
-    }
-
-    private static validate({email, password}:IUser){
-        const tempUser = new User(0, email, password);
-        if(!tempUser.validatedEmail()){
-            throw new ValidationError("Email no es valido");
-        }
-        if(!tempUser.validatedPassword()){
-            throw new ValidationError("Password debe tener al menos 6 caracteres");
-        }
-    }
-
-    static crear({id, email, password}:IUser):User{
-        
-        this.validate({id, email, password});
-
-        return new User(id, email, password);
-        
-    }
+  // -----------------------------
+  // Método fábrica
+  // -----------------------------
+  static crear(props: UserProps): User {
+    this.validar(props);
+    return new User(props);
+  }
 }

@@ -70,42 +70,9 @@ export default function FormularioEnvio() {
         />
       </div>
 
-     
-        <div className="flex flex-col gap-2">
-          <label className="font-semibold text-sm">Ciudad</label>
-          <Input
-            name="ciudad"
-            type="text"
-            className="input"
-            value={form.ciudad}
-            onChange={handleChange}
-            required
-          />
-        </div>
+    
 
-        <div className="flex flex-col gap-2">
-          <label className="font-semibold text-sm">Región</label>
-          <Input
-            name="region"
-            type="text"
-            className="input"
-            value={form.region}
-            onChange={handleChange}
-            required
-          />
-        </div>
      
-
-      <div className="flex flex-col gap-2">
-        <label className="font-semibold text-sm">Código Postal</label>
-        <Input
-          name="codigoPostal"
-          type="text"
-          className="input"
-          value={form.codigoPostal}
-          onChange={handleChange}
-        />
-      </div>
 
       <div className="flex flex-col gap-2">
         <label className="font-semibold text-sm">Teléfono</label>

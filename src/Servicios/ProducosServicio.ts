@@ -1,6 +1,6 @@
 import { Producto } from "../Dominio/Entidades/Producto";
 import { IProductoRepository } from "../Dominio/RepoInterface/IProductoRepository";
-import { ProductosRepositorio } from "../Infraestructura/mock/MockProductos";
+import { ProductosRepositorio } from "../Infraestructura/supabase/ProductoRepository";
 
  class ProductosServicio {
 
@@ -13,6 +13,7 @@ import { ProductosRepositorio } from "../Infraestructura/mock/MockProductos";
     async obtenerTodosLosProductos() {
         try {
             const productos = await this.repositorio.obtenerTodos();
+            console.log(productos)
             
             const productosValidos = productos.map(prod => {
                 return Producto.crear({
@@ -28,6 +29,7 @@ import { ProductosRepositorio } from "../Infraestructura/mock/MockProductos";
             return productosValidos;
         }
         catch (error) {
+            console.log(error)
             throw new Error("Error al obtener los productos: " + (error as Error).message);
         }
        

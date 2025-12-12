@@ -1,6 +1,6 @@
 import { IUserRepository } from "../Dominio/RepoInterface/IUserRepository";
 import { User } from "../Dominio/Entidades/User";
-import { MockUser } from "../Infraestructura/mock/MockUser";
+import { UserRepository } from "../Infraestructura/supabase/UserRepository";
 import { ValidationError } from "../CustomError";
 
 export class UserServicio {
@@ -67,5 +67,5 @@ export class UserServicio {
 }   
 
 
-const userRepositorio = new MockUser();
+const userRepositorio = new UserRepository();
 export const userServicio = new UserServicio(userRepositorio);
