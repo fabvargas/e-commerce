@@ -42,3 +42,23 @@ body {
 .custom-scroll::-webkit-scrollbar-track {
   background: transparent;
 }
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+.animate-shake {
+  animation: shake 0.3s ease-in-out;
+}
+
+select {
+  background-color: var(--color-input) !important;
+  color: var(--color-foreground) !important;
+}
+
+select option {
+  background-color: var(--color-input) !important;
+  color: var(--color-foreground) !important;
+}

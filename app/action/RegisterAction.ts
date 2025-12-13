@@ -6,6 +6,11 @@ import { ValidationError } from "@/src/CustomError";
 interface ResponseRegister {
   error: boolean;
   message?: string;
+  data?: {
+    id: number;
+    email: string;
+    rol?: string;
+  };
 }
 
 export default async function RegisterAction(
@@ -31,7 +36,7 @@ export default async function RegisterAction(
       };
     }
 
-   await userServicio.registrarUsuario(
+   const nuevoUsuario = await userServicio.registrarUsuario(
       email.toString(),
       password.toString(),
       confirmPassword.toString()
@@ -40,6 +45,11 @@ export default async function RegisterAction(
     return {
       error: false,
       message: "Usuario registrado correctamente",
+      data: {
+        id: nuevoUsuario.id,
+        email: nuevoUsuario.email,
+        rol: nuevoUsuario.rol,
+      },
     };
   } catch (error) {
 
