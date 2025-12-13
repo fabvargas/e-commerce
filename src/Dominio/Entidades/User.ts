@@ -7,6 +7,7 @@ export interface UserProps {
   nombre?: string;
   direccion?: string;
   telefono?: string;
+  rol?: string;
 }
 
 export class User implements UserProps {
@@ -16,6 +17,7 @@ export class User implements UserProps {
   nombre?: string;
   direccion?: string;
   telefono?: string;
+  rol?: string;
 
   private constructor({
     id,
@@ -23,7 +25,8 @@ export class User implements UserProps {
     password,
     nombre,
     direccion,
-    telefono
+    telefono,
+    rol
   }: UserProps) {
     this.id = id;
     this.email = email;
@@ -31,6 +34,7 @@ export class User implements UserProps {
     this.nombre = nombre;
     this.direccion = direccion;
     this.telefono = telefono;
+    this.rol = rol || 'usuario';
   }
 
   // -----------------------------

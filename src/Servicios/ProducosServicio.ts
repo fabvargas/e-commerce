@@ -54,6 +54,27 @@ import { ProductosRepositorio } from "../Infraestructura/supabase/ProductoReposi
             throw new Error("Error al obtener el producto: " + (error as Error).message);
         }
     }
+
+    async actualizarStock(id: number, stock: number) {
+        try {
+            if (stock < 0) {
+                throw new Error("El stock no puede ser negativo");
+            }
+
+            const productoActualizado = await this.repositorio.actualizarStock(id, stock);
+            
+            return Producto.crear({
+                id: productoActualizado.id,
+                nombre: productoActualizado.nombre,
+                precio: productoActualizado.precio,
+                descripcion: productoActualizado.descripcion,
+                stock: productoActualizado.stock,
+                imgUrl: productoActualizado.imgUrl
+            });
+        } catch (error) {
+            throw new Error("Error al actualizar el stock: " + (error as Error).message);
+        }
+    }
 }
 
 

@@ -21,7 +21,11 @@ export class UserRepository implements IUserRepository {
         return {
             id: data.id,
             email: data.email,
-            password: data.password
+            password: data.password,
+            nombre: data.nombre,
+            direccion: data.direccion,
+            telefono: data.telefono,
+            rol: data.rol || 'usuario'
         };
     }
 
@@ -40,7 +44,11 @@ export class UserRepository implements IUserRepository {
         return {
             id: data.id,
             email: data.email,
-            password: data.password
+            password: data.password,
+            nombre: data.nombre,
+            direccion: data.direccion,
+            telefono: data.telefono,
+            rol: data.rol || 'usuario'
         };
     }
 
@@ -59,7 +67,35 @@ export class UserRepository implements IUserRepository {
         return {
             id: data.id,
             email: data.email,
-            password: data.password
+            password: data.password,
+            nombre: data.nombre,
+            direccion: data.direccion,
+            telefono: data.telefono,
+            rol: data.rol || 'usuario'
+        };
+    }
+
+    async actualizarUsuario(id: number, datos: {nombre?: string, direccion?: string, telefono?: string}): Promise<UserProps> {
+        const { data, error } = await this.db
+            .from("Usuario")
+            .update(datos)
+            .eq("id", id)
+            .select()
+            .single();
+
+        if (error) {
+            console.error("Error updating user:", error);
+            throw new Error("Error al actualizar el usuario: " + error.message);
+        }
+
+        return {
+            id: data.id,
+            email: data.email,
+            password: data.password,
+            nombre: data.nombre,
+            direccion: data.direccion,
+            telefono: data.telefono,
+            rol: data.rol || 'usuario'
         };
     }
 }

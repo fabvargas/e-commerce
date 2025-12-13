@@ -61,4 +61,32 @@ export class ProductosRepositorio implements IProductoRepository {
       imgUrl: data.imagenUrl
     };
   }
+
+  async actualizarStock(id: number, stock: number): Promise<ProductoProps> {
+    try {
+      const { data, error } = await this.db
+        .from("Producto")
+        .update({ stock })
+        .eq("id", id)
+        .select()
+        .single();
+
+      if (error) {
+        console.error(`Error updating stock for product ${id}:`, error);
+        throw new Error("Error al actualizar el stock: " + error.message);
+      }
+
+      return {
+        id: data.id,
+        nombre: data.nombre,
+        precio: data.precio,
+        descripcion: data.descripcion,
+        stock: data.stock,
+        imgUrl: data.imagenUrl
+      };
+    } catch (err) {
+      console.error("Error inesperado en actualizarStock():", err);
+      throw err;
+    }
+  }
 }

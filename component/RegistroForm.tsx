@@ -4,11 +4,13 @@ import Input from "./Input";
 import Link from "next/link";
 import { useState, useTransition } from "react";
 import RegisterAction from "@/app/action/RegisterAction";
+import { useAuth } from "@/store/useAuth";
 
 export default function RegistroForm() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<boolean | null>(null);
   const [isPending, startTransition] = useTransition();
+  const { login } = useAuth();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -24,6 +26,14 @@ export default function RegistroForm() {
         setMessage(response.message || "Error al registrar usuario");
         setError(true);
         return;
+      }
+
+      if (response.data) {
+        login({
+          id: response.data.id,
+          email: response.data.email,
+          rol: response.data.rol,
+        });
       }
 
       setError(false);

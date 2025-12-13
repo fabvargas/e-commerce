@@ -4,11 +4,13 @@ import { useState, useTransition } from "react";
 import Link from "next/link";
 import Input from "./Input";
 import LoginAction from "@/app/action/LoginAction";
+import { useAuth } from "@/store/useAuth";
 
 export default function LoginForm() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<boolean | null>(null);
   const [isPending, startTransition] = useTransition();
+  const { login } = useAuth();
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,6 +27,14 @@ export default function LoginForm() {
         setMessage(response.message || "Error al iniciar sesión");
         setError(true);
         return;
+      }
+
+      if (response.data) {
+        login({
+          id: response.data.id,
+          email: response.data.email,
+          rol: response.data.rol,
+        });
       }
 
       setError(false);

@@ -8,6 +8,7 @@ interface ResponseLogin {
     data?: {
         id: number;
         email: string;
+        rol?: string;
     };
     error: boolean;
     message?: string;
@@ -58,7 +59,8 @@ export default async function LoginAction(formData: FormData): Promise<ResponseL
             error: false,
             data: {
                 id: user.id,
-                email: user.email
+                email: user.email,
+                rol: user.rol
             },
             message: "Login exitoso"
         };

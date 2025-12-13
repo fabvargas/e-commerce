@@ -1,11 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useTransition } from "react";
 import Input from "./Input";
 import { useCarrito } from "@/store/useCarrito";
+import { useAuth } from "@/store/useAuth";
+import GetUserAction from "@/app/action/GetUserAction";
 
 export default function FormularioEnvio() {
   const {carrito}= useCarrito()
+  const { user, isAuthenticated } = useAuth()
+  const [isPending, startTransition] = useTransition()
   const [form, setForm] = useState({
     nombre: "",
     email: "",
@@ -16,6 +20,23 @@ export default function FormularioEnvio() {
     telefono: "",
     metodoPago: "tarjeta",
   });
+
+  useEffect(() => {
+    if (isAuthenticated() && user) {
+      startTransition(async () => {
+        const response = await GetUserAction(user.id);
+        if (!response.error && response.data) {
+          setForm(prev => ({
+            ...prev,
+            nombre: response.data?.nombre || "",
+            email: response.data?.email || "",
+            direccion: response.data?.direccion || "",
+            telefono: response.data?.telefono || "",
+          }));
+        }
+      });
+    }
+  }, [user, isAuthenticated]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -90,13 +111,13 @@ export default function FormularioEnvio() {
         <label className="font-semibold text-sm">Método de pago</label>
         <select
           name="metodoPago"
-          className="input"
+          className="input bg-input text-foreground"
           value={form.metodoPago}
           onChange={handleChange}
         >
-          <option value="tarjeta">Tarjeta de crédito / débito</option>
-          <option value="transferencia">Transferencia bancaria</option>
-          <option value="contraentrega">Pago contra entrega</option>
+          <option value="tarjeta" className="bg-input text-foreground">Tarjeta de crédito / débito</option>
+          <option value="transferencia" className="bg-input text-foreground">Transferencia bancaria</option>
+          <option value="contraentrega" className="bg-input text-foreground">Pago contra entrega</option>
         </select>
       </div>
 
